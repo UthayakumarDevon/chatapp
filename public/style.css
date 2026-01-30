@@ -245,6 +245,7 @@ body.dark .typing-indicator span { background: #eee; }
   position: sticky;
   bottom: 0;
   background: #f9f9f9;
+  padding:8px;
   border-radius: 8px;
 }
 .inputbar input {
@@ -307,7 +308,7 @@ body.dark .ticks { color: #bbb; }
 body.dark .ticks.seen { color: lightgreen; }
 
 /* ===== Responsive ===== */
-@media (max-width:800px) {
+@media (max-width:300px) {
   .container { width:92%; max-width: 95%; }
   #chat { border-radius: 8px; }
   .topbar { height:20px; width:100%; }
