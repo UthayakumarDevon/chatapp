@@ -308,10 +308,58 @@ body.dark .ticks { color: #bbb; }
 body.dark .ticks.seen { color: lightgreen; }
 
 /* ===== Responsive ===== */
-@media (max-width:300px) {
-  .container { width:92%; max-width: 95%; }
-  #chat { border-radius: 8px; }
-  .topbar { height:20px; width:100%; }
+@media (max-width:300px) {/* Make sure the app fills the entire viewport on mobile */
+html, body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Container should stretch to full screen */
+.container {
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  padding: 0;              /* remove extra padding */
+  border-radius: 0;        /* no rounded edges on mobile */
+}
+
+/* Chat area fills available space */
+#chat {
+  height: calc(100vh - 140px); /* adjust based on topbar + inputbar height */
+  border-radius: 0;
+}
+
+/* Input bar sticks to bottom, full width */
+.inputbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  border-radius: 0;
+  margin: 0;
+}
+
+/* Top bar fixed at top */
+.topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  background: #f9f9f9;
+  padding: 6px;
+  z-index: 10;
+}
+
+/* Adjust chat area to account for fixed topbar */
+#chat {
+  margin-top: 50px;   /* height of topbar */
+  margin-bottom: 60px; /* height of inputbar */
+}
+
 }
 
 /* ===== Bubble fade-in animation ===== */
