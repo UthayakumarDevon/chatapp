@@ -308,7 +308,7 @@ body.dark .ticks { color: #bbb; }
 body.dark .ticks.seen { color: lightgreen; }
 
 /* ===== Responsive ===== */
-@media (max-width:300px) {/* Make sure the app fills the entire viewport on mobile */
+@media (max-width:650px) {/* Make sure the app fills the entire viewport on mobile */
 html, body {
   height: 100%;
   width: 100%;
