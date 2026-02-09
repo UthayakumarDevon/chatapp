@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>MY MEMORIES</title>
+<style>
+/* -------------------------
+   Original base + theme vars
+   ------------------------- */
+body {
+  background-color:#111;
+  transition: background 1s ease, color 1s ease;
+}
+
+.gradient-btn {
+  transition: background 1s ease, box-shadow 1s ease, outline-color 1s ease, transform 0.3s ease;
+}
+
+#theme-bar {
+  transition: background 1s ease, box-shadow 1s ease, height 0.3s ease;
+}
+
+#theme-indicator {
+  transition: color 1s ease, text-shadow 1s ease, opacity 0.8s ease;
+}
+
+body {
+  background-color:#111;
+}
+
+/* Default Neon Theme */
+body.theme-default {
+  --color1: #ff0066;
+  --color2: #ffcc00;
+  --color3: #00ffcc;
+  --color4: #0066ff;
+  --outline: cadetblue;
+  --glow: 20px;
+}
+
+/* Cyberpunk Theme */
+body.theme-cyberpunk {
+  --color1: #9d00ff;
+  --color2: #00ff66;
+  --color3: #00eaff;
+  --color4: #ff00aa;
+  --outline: lime;
+  --glow: 35px;
+}
+
+/* Retro Theme */
+body.theme-retro {
+  --color1: #ff6600;
+  --color2: #0066ff;
+  --color3: #00cccc;
+  --color4: #cc0000;
+  --outline: darkorange;
+  --glow: 15px;
+}
+
+/* -------------------------
+   Button base (original)
+   ------------------------- */
+.gradient-btn {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(45deg, var(--color1), var(--color2), var(--color3), var(--color4));
+  background-size: 400% 400%;
+  color: white;
+  border: none;
+  padding: 1em 2em;
+  font-size: 1.2em;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: bold;
+  width: 80%;
+  max-width: 300px;
+  margin: 20px auto;
+  display: block;
+  outline: 3px solid var(--outline);
+  outline-offset: 3px;
+  opacity: 0;
+  transform: scale(0.9);
+  animation: fadeInButton 1.5s ease forwards,
+             gradientShift 6s ease infinite,
+             shadowShift 6s ease infinite,
+             outlineShift 6s ease infinite;
+  transition: background 1s ease, box-shadow 1s ease, outline-color 1s ease;
+  will-change: transform, opacity, box-shadow, outline-color;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.gradient-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 calc(var(--glow) + 10px) var(--color2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Progress bar at top */
+#theme-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 6px;
+  width: 100%;
+  background: linear-gradient(90deg, var(--color1), var(--color2), var(--color3), var(--color4));
+  background-size: 400% 400%;
+  animation: gradientShift 6s ease infinite;
+  z-index: 999;
+  transition: height 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Heartbeat pulse for progress bar */
+@keyframes barHeartbeat {
+  0%   { height: 6px; box-shadow: 0 0 10px var(--color1); }
+  20%  { height: 10px; box-shadow: 0 0 20px var(--color2); }
+  40%  { height: 8px; box-shadow: 0 0 15px var(--color3); }
+  60%  { height: 12px; box-shadow: 0 0 25px var(--color4); }
+  80%  { height: 9px; box-shadow: 0 0 18px var(--color1); }
+  100% { height: 6px; box-shadow: 0 0 10px var(--color1); }
+}
+
+/* Hover effect: bar grows slightly when hovering button */
+.gradient-btn:hover ~ #theme-bar,
+#theme-bar:hover {
+  height: 8px;
+  box-shadow: 0 0 15px var(--color2);
+}
+
+/* Theme indicator heartbeat glow */
+@keyframes indicatorHeartbeat {
+  0%   { text-shadow: 0 0 5px var(--color1); color: var(--color1); }
+  20%  { text-shadow: 0 0 12px var(--color2); color: var(--color2); }
+  40%  { text-shadow: 0 0 10px var(--color3); color: var(--color3); }
+  60%  { text-shadow: 0 0 15px var(--color4); color: var(--color4); }
+  80%  { text-shadow: 0 0 8px var(--color1); color: var(--color1); }
+  100% { text-shadow: none; color: white; }
+}
+
+/* Theme indicator styling */
+#theme-indicator {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(0,0,0,0.7);
+  color: white;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 0.9em;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.8s ease;
+  animation: indicatorCycle 6s ease infinite;
+}
+#theme-indicator.show {
+  opacity: 1;
+}
+
+/* Indicator continuous color cycle */
+@keyframes indicatorCycle {
+  0%   { color: var(--color1); text-shadow: 0 0 5px var(--color1); }
+  25%  { color: var(--color2); text-shadow: 0 0 8px var(--color2); }
+  50%  { color: var(--color3); text-shadow: 0 0 10px var(--color3); }
+  75%  { color: var(--color4); text-shadow: 0 0 8px var(--color4); }
+  100% { color: var(--color1); text-shadow: 0 0 5px var(--color1); }
+}
+
+/* Fade-in animation */
+@keyframes fadeInButton {
+  0%   { opacity: 0; transform: scale(0.9); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+/* Gradient animation */
+@keyframes gradientShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Outline synced with gradient colors */
+@keyframes outlineShift {
+  0%   { outline-color: var(--color1); }
+  25%  { outline-color: var(--color2); }
+  50%  { outline-color: var(--color3); }
+  75%  { outline-color: var(--color4); }
+  100% { outline-color: var(--color1); }
+}
+
+/* Continuous shadow glow */
+@keyframes shadowShift {
+  0%   { box-shadow: inset 0 2px 6px rgba(0,0,0,0.4), 0 0 var(--glow) var(--color1); }
+  25%  { box-shadow: inset 0 2px 6px rgba(0,0,0,0.4), 0 0 var(--glow) var(--color2); }
+  50%  { box-shadow: inset 0 2px 6px rgba(0,0,0,0.4), 0 0 var(--glow) var(--color3); }
+  75%  { box-shadow: inset 0 2px 6px rgba(0,0,0,0.4), 0 0 var(--glow) var(--color4); }
+  100% { box-shadow: inset 0 2px 6px rgba(0,0,0,0.4), 0 0 var(--glow) var(--color1); }
+}
+
+/* Ripple base style */
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  transform: scale(0);
+  opacity: 0.8;
+  pointer-events: none;
+  filter: blur(3px);
+  will-change: transform, opacity;
+}
+
+/* Ripple heartbeat animation */
+@keyframes rippleHeartbeat {
+  0%   { transform: scale(0); opacity: 0.9; background: radial-gradient(circle, var(--color1), transparent); }
+  20%  { transform: scale(20); opacity: 0.6; background: radial-gradient(circle, var(--color2), transparent); }
+  40%  { transform: scale(10); opacity: 0.5; background: radial-gradient(circle, var(--color3), transparent); }
+  60%  { transform: scale(25); opacity: 0.4; background: radial-gradient(circle, var(--color4), transparent); }
+  100% { transform: scale(0); opacity: 0; background: radial-gradient(circle, var(--color1), transparent); }
+}
+
+/* Button heartbeat sync */
+@keyframes buttonHeartbeat {
+  0%   { transform: scale(1); }
+  20%  { transform: scale(1.08); }
+  40%  { transform: scale(0.95); }
+  60%  { transform: scale(1.05); }
+  80%  { transform: scale(0.98); }
+  100% { transform: scale(1); }
+}
+
+/* Shadow + outline double-pulse sync */
+@keyframes shadowHeartbeatDouble {
+  0%   { box-shadow: inset 0 2px 4px rgba(0,0,0,0.6), 0 0 15px var(--color1); outline-color: var(--color1); }
+  20%  { box-shadow: inset 0 3px 8px rgba(0,0,0,0.7), 0 0 35px var(--color2); outline-color: var(--color2); }
+  40%  { box-shadow: inset 0 1px 3px rgba(0,0,0,0.5), 0 0 25px var(--color3); outline-color: var(--color3); }
+  60%  { box-shadow: inset 0 4px 10px rgba(0,0,0,0.8), 0 0 40px var(--color4); outline-color: var(--color4); }
+  80%  { box-shadow: inset 0 2px 6px rgba(0,0,0,0.6), 0 0 30px var(--color1); outline-color: var(--color1); }
+  100% { box-shadow: inset 0 2px 6px rgba(0,0,0,0.4), 0 0 20px var(--color1); outline-color: var(--outline); }
+}
+
+/* -------------------------
+   Multi-button layout
+   ------------------------- */
+.btn-grid {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px;
+}
+
+/* Make each button behave like the original but allow smaller widths in a row */
+.btn-grid .gradient-btn {
+  width: 260px;
+  max-width: calc(100% - 32px);
+  margin: 8px;
+}
+
+.back-btn {
+      background-color: transparent;
+      color: #91A3B0 ;
+      padding: 4px 8px;
+      border: 2px solid #36454F ;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 15px;
+	  opacity:0.8;
+      transition: background-color 0.3s ease;
+    }
+
+    .back-btn:hover {
+      background-color: #D3D3D3 ;
+    }
+
+    .back-btn:active {
+      background-color: #696969;
+    }
+
+/* Responsive: stack and enlarge on small screens */
+@media (max-width: 1024px) {
+  .btn-grid .gradient-btn { width: 86%; max-width: 420px; font-size: 1.05rem; padding: 1rem 1.8rem; }
+}
+
+
+@media (min-width: 600px) {
+  body {
+    display: flex;
+    align-items: center;      /* vertical centering */
+    justify-content: center;  /* horizontal centering */
+    min-height: 100vh;
+  }
+
+  .btn-grid {
+    display: flex;
+    flex-direction: column;   /* stack vertically */
+    align-items: center;
+    justify-content: center;
+    gap: 20px;                /* spacing between buttons */
+    width: 100%;
+    max-width: 600px;         /* fixed maximum width */
+    margin: 0 auto;
+    padding: 24px 16px;
+    box-sizing: border-box;
+  }
+
+  .btn-grid .gradient-btn {
+    width: 100%;              /* fill the column width */
+    max-width: 600px;         /* cap button width */
+    padding: 1.2rem 2rem;     /* larger padding for desktop */
+    font-size: 1.3rem;        /* optional: bigger text */
+  }
+}
+
+
+@media (max-width: 600px) {
+
+  .gradient-btn { 
+    box-shadow: 0 10px 26px rgba(0,0,0,0.55); 
+  }
+  
+  .btn-grid {
+    display: flex;
+    flex-direction: column;   /* stack vertically */
+    align-items: center;
+    justify-content: flex-start; /* start from top, but we’ll push down */
+    gap: 16px;
+    width: 100%;
+    padding: 24px 16px;
+    margin-top: 60px;         /* displace buttons below from top */
+    box-sizing: border-box;
+  }
+
+  .btn-grid .gradient-btn {
+    width: 90%;
+    max-width: 420px;
+  }
+}
+
+
+/* Respect user preference for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .gradient-btn, #theme-bar, #theme-indicator {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* Touch feedback: active state (instant visual feedback on tap) */
+.gradient-btn:active {
+  transform: translateY(0) scale(0.98);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.6), 0 0 calc(var(--glow) + 2px) var(--color3);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+/* Long-press visual state (JS toggles .long-press) */
+.gradient-btn.long-press {
+  animation: buttonHeartbeat 1.2s ease-out;
+  outline-offset: 2px;
+}
+
+/* small helper for accessible label placement if needed */
+.visually-hidden {
+  position: absolute !important;
+  height: 1px; width: 1px;
+  overflow: hidden; clip: rect(1px,1px,1px,1px);
+  white-space: nowrap; border: 0; padding: 0; margin: -1px;
+}
+</style>
+</head>
+<body class="theme-default">
+
+<button class="back-btn" onclick="history.back()">⬅ Back</button>
+
+  <!-- Top progress bar -->
+  <div id="theme-bar" aria-hidden="true"></div>
+
+  <!-- Buttons container: five neon heartbeat buttons -->
+  <div class="btn-grid" aria-label="Neon theme controls">
+    <button class="gradient-btn" id="neon-btn-1">My Drawing</button>
+    <button class="gradient-btn" id="neon-btn-2">Photo Collections</button>
+    <button class="gradient-btn" id="neon-btn-3">Advanced Wishes</button>
+    <button class="gradient-btn" id="neon-btn-4">My Inner Feelings</button>
+    <button class="gradient-btn" id="neon-btn-5">Inbox</button>
+  </div>
+
+  <!-- Theme indicator -->
+  <div id="theme-indicator" aria-hidden="true"></div>
+
+<script>
+/* -------------------------
+   Theme + UI helpers
+   ------------------------- */
+const themes = ["theme-default", "theme-cyberpunk", "theme-retro"];
+const themeNames = ["Default Neon", "Cyberpunk", "Retro Orange/Blue"];
+let currentThemeIndex = 0;
+
+function showThemeIndicator(name) {
+  const indicator = document.getElementById('theme-indicator');
+  indicator.textContent = `Theme: ${name}`;
+  indicator.classList.add('show');
+  clearTimeout(indicator._hideTimer);
+  indicator._hideTimer = setTimeout(() => indicator.classList.remove('show'), 1500);
+}
+
+function setTheme(index) {
+  currentThemeIndex = (index + themes.length) % themes.length;
+  document.body.className = themes[currentThemeIndex];
+  showThemeIndicator(themeNames[currentThemeIndex]);
+}
+
+function cycleTheme() {
+  setTheme(currentThemeIndex + 1);
+}
+
+/* -------------------------
+   Heartbeat / ripple utilities
+   ------------------------- */
+function applyHeartbeat(button) {
+  // Apply heartbeat animations temporarily
+  button.style.animation =
+    "fadeInButton 1.5s ease forwards, gradientShift 6s ease infinite, shadowShift 6s ease infinite, outlineShift 6s ease infinite, buttonHeartbeat 1.5s ease-out, shadowHeartbeatDouble 1.5s ease-out";
+
+  const bar = document.getElementById('theme-bar');
+  bar.style.animation = "gradientShift 6s ease infinite, barHeartbeat 1.5s ease-out";
+
+  const indicator = document.getElementById('theme-indicator');
+  indicator.style.animation = "indicatorCycle 6s ease infinite, indicatorHeartbeat 1.5s ease-out";
+
+  setTimeout(() => {
+    // revert to continuous animations
+    button.style.animation =
+      "fadeInButton 1.5s ease forwards, gradientShift 6s ease infinite, shadowShift 6s ease infinite, outlineShift 6s ease infinite";
+    bar.style.animation = "gradientShift 6s ease infinite";
+    indicator.style.animation = "indicatorCycle 6s ease infinite";
+  }, 1500);
+}
+
+function createRippleAt(button, clientX, clientY) {
+  const rect = button.getBoundingClientRect();
+  const size = Math.max(rect.width, rect.height) * 1.2;
+  const x = (clientX - rect.left) - size / 2;
+  const y = (clientY - rect.top) - size / 2;
+
+  const ripple = document.createElement('span');
+  ripple.className = 'ripple';
+  ripple.style.width = ripple.style.height = size + 'px';
+  ripple.style.left = x + 'px';
+  ripple.style.top = y + 'px';
+  ripple.style.animation = 'rippleHeartbeat 1.5s ease-out';
+  button.appendChild(ripple);
+  setTimeout(() => ripple.remove(), 1600);
+}
+
+/* -------------------------
+   Button behaviors (click, touch, long-press)
+   ------------------------- */
+const buttons = Array.from(document.querySelectorAll('.gradient-btn'));
+
+// Long-press detection parameters
+const LONG_PRESS_MS = 600;
+
+buttons.forEach((btn, idx) => {
+  // Click / mouse
+  btn.addEventListener('click', (e) => {
+    // create ripple at click position
+    createRippleAt(btn, e.clientX, e.clientY);
+    applyHeartbeat(btn);
+    // Default action: cycle theme on first button, other buttons can be customized
+    if (btn.id === 'neon-btn-1') {
+      cycleTheme();
+    } else if (btn.id === 'neon-btn-2') {
+      // previous theme
+      setTheme(currentThemeIndex - 1);
+    } else if (btn.id === 'neon-btn-3') {
+      // reset to default
+      setTheme(0);
+    } else if (btn.id === 'neon-btn-4') {
+      // heartbeat-only (no theme change)
+      // already applied above
+    } else if (btn.id === 'neon-btn-5') {
+      // random theme
+      setTheme(Math.floor(Math.random() * themes.length));
+    }
+  });
+
+  // Touch handling (for mobile)
+  let longPressTimer = null;
+  let touchStartX = 0;
+  let touchStartY = 0;
+  let moved = false;
+
+  btn.addEventListener('touchstart', (e) => {
+    moved = false;
+    const t = e.touches[0];
+    touchStartX = t.clientX;
+    touchStartY = t.clientY;
+
+    // start long-press timer
+    longPressTimer = setTimeout(() => {
+      btn.classList.add('long-press');
+      // long-press triggers heartbeat-only visual
+      applyHeartbeat(btn);
+    }, LONG_PRESS_MS);
+  }, {passive: true});
+
+  btn.addEventListener('touchmove', (e) => {
+    const t = e.touches[0];
+    if (Math.abs(t.clientX - touchStartX) > 10 || Math.abs(t.clientY - touchStartY) > 10) {
+      moved = true;
+      if (longPressTimer) {
+        clearTimeout(longPressTimer);
+        longPressTimer = null;
+      }
+    }
+  }, {passive: true});
+
+  btn.addEventListener('touchend', (e) => {
+    if (longPressTimer) {
+      clearTimeout(longPressTimer);
+      longPressTimer = null;
+    }
+    if (btn.classList.contains('long-press')) {
+      // remove long-press class after short delay
+      setTimeout(() => btn.classList.remove('long-press'), 400);
+      // do not trigger click action after long-press
+      return;
+    }
+    // If touchend and not moved, treat as tap
+    if (!moved) {
+      const touch = (e.changedTouches && e.changedTouches[0]) || {};
+      const cx = touch.clientX || (btn.getBoundingClientRect().left + btn.offsetWidth / 2);
+      const cy = touch.clientY || (btn.getBoundingClientRect().top + btn.offsetHeight / 2);
+      createRippleAt(btn, cx, cy);
+      applyHeartbeat(btn);
+      // replicate click behavior
+      if (btn.id === 'neon-btn-1') {
+        cycleTheme();
+      } else if (btn.id === 'neon-btn-2') {
+        setTheme(currentThemeIndex - 1);
+      } else if (btn.id === 'neon-btn-3') {
+        setTheme(0);
+      } else if (btn.id === 'neon-btn-4') {
+        // heartbeat-only
+      } else if (btn.id === 'neon-btn-5') {
+        setTheme(Math.floor(Math.random() * themes.length));
+      }
+    }
+  }, {passive: true});
+
+  btn.addEventListener('touchcancel', () => {
+    if (longPressTimer) {
+      clearTimeout(longPressTimer);
+      longPressTimer = null;
+    }
+    btn.classList.remove('long-press');
+  });
+});
+
+/* -------------------------
+   Global gestures and keyboard
+   ------------------------- */
+
+// Auto cycle every 10s
+let autoCycle = setInterval(cycleTheme, 10000);
+
+// Double-tap anywhere to cycle
+let lastTap = 0;
+document.body.addEventListener('touchend', (e) => {
+  const now = Date.now();
+  if (now - lastTap < 300) {
+    cycleTheme();
+  }
+  lastTap = now;
+}, {passive: true});
+
+// Keyboard shortcuts
+document.addEventListener('keydown', (e) => {
+  // Spacebar → cycle
+  if (e.code === 'Space') {
+    e.preventDefault();
+    cycleTheme();
+  }
+
+  // R → reset
+  if (e.code === 'KeyR') {
+    setTheme(0);
+  }
+
+  // Enter → heartbeat on first button
+  if (e.code === 'Enter') {
+    const b = document.getElementById('neon-btn-1');
+    if (b) applyHeartbeat(b);
+  }
+
+  // Arrow keys → cycle
+  if (e.code === 'ArrowRight') {
+    cycleTheme();
+  }
+  if (e.code === 'ArrowLeft') {
+    setTheme(currentThemeIndex - 1);
+  }
+});
+
+/* -------------------------
+   Swipe gestures (left/right) for theme cycling
+   ------------------------- */
+let swipeStartX = null;
+let swipeStartY = null;
+
+document.addEventListener('touchstart', (e) => {
+  const t = e.touches[0];
+  swipeStartX = t.clientX;
+  swipeStartY = t.clientY;
+}, {passive: true});
+
+document.addEventListener('touchend', (e) => {
+  if (swipeStartX === null) return;
+  const t = (e.changedTouches && e.changedTouches[0]) || {};
+  const dx = (t.clientX || 0) - swipeStartX;
+  const dy = (t.clientY || 0) - swipeStartY;
+  // horizontal swipe threshold and mostly horizontal
+  if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy)) {
+    if (dx > 0) {
+      // swipe right -> previous theme
+      setTheme(currentThemeIndex - 1);
+    } else {
+      // swipe left -> next theme
+      cycleTheme();
+    }
+  }
+  swipeStartX = null;
+  swipeStartY = null;
+}, {passive: true});
+
+/* -------------------------
+   Accessibility: focus outlines for keyboard users
+   ------------------------- */
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Tab') {
+    document.body.classList.add('show-focus');
+  }
+});
+
+/* -------------------------
+   Initialization
+   ------------------------- */
+setTheme(0); // ensure initial theme indicator shows once on load
+
+document.getElementById("neon-btn-1").addEventListener("click", (e) => {
+  const btn = e.currentTarget;
+  // trigger your ripple + heartbeat
+  createRippleAt(btn, e.clientX, e.clientY);
+  applyHeartbeat(btn);
+
+  // delay navigation by 1 second
+  setTimeout(() => {
+    window.location.href = "My_drawing.html";
+  }, 1500); // adjust delay to match animation length
+});
+
+document.getElementById("neon-btn-2").addEventListener("click", (e) => {
+  const btn = e.currentTarget;
+  // trigger your ripple + heartbeat
+  createRippleAt(btn, e.clientX, e.clientY);
+  applyHeartbeat(btn);
+
+  // delay navigation by 1 second
+  setTimeout(() => {
+    window.location.href = "Photo_collections.html";
+  }, 1500); // adjust delay to match animation length
+});
+
+document.getElementById("neon-btn-3").addEventListener("click", (e) => {
+  const btn = e.currentTarget;
+  // trigger your ripple + heartbeat
+  createRippleAt(btn, e.clientX, e.clientY);
+  applyHeartbeat(btn);
+
+  // delay navigation by 1 second
+  setTimeout(() => {
+    window.location.href = "Advanced_wishes.html";
+  }, 1500); // adjust delay to match animation length
+});
+
+document.getElementById("neon-btn-4").addEventListener("click", (e) => {
+  const btn = e.currentTarget;
+  // trigger your ripple + heartbeat
+  createRippleAt(btn, e.clientX, e.clientY);
+  applyHeartbeat(btn);
+
+  // delay navigation by 1 second
+  setTimeout(() => {
+    window.location.href = "My_Inner_Feelings.html";
+  }, 1500); // adjust delay to match animation length
+});
+
+document.getElementById("neon-btn-5").addEventListener("click", (e) => {
+  const btn = e.currentTarget;
+  // trigger your ripple + heartbeat
+  createRippleAt(btn, e.clientX, e.clientY);
+  applyHeartbeat(btn);
+
+  // delay navigation by 1 second
+  setTimeout(() => {
+    window.location.href = "lock.html";
+  }, 1500); // adjust delay to match animation length
+});
+
+
+</script>
+</body>
+</html>

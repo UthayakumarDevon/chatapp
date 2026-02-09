@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Protected page by “Oni”</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Lobster&display=swap" rel="stylesheet">
+
+  <!-- Prevent caching -->
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <style>
+    /* Shared gradient text effect */
+    .gradient-text {
+      background: linear-gradient(-45deg, #0b0c10, #111, #2e8b57, #dc143c, #00ffff);
+      background-size: 400% 400%;
+      animation: gradientShift 10s ease infinite, fadeIn 2s ease forwards;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+	
+
+    /* Font styles */
+    .poppins h1 { font-family: 'Poppins', sans-serif; font-size: 70px; padding-top:50px;}
+    .lobster h1 { font-family: 'Lobster', cursive; font-size: 70px; padding-top:35px; line-height:75px;}
+
+    /* Fade-in animation */
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(-20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Gradient animation */
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Glowing blurred box */
+    .dev {
+      background: transparent;
+      backdrop-filter: blur(5px);
+      height: 30%;
+      width: 40%;
+      border: 0px;
+      border-radius: 12px;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      animation: outerGlow 6s ease-in-out infinite;
+    }
+
+    /* Gradient border layer */
+    .dev::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 12px;
+      padding: 3px;
+      background: linear-gradient(to right, black, dimgray);
+      background-size: 200% 200%;
+      animation: borderShift 6s ease-in-out infinite;
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      z-index: -1;
+    }
+
+    /* Smoothly shifting border colors */
+    @keyframes borderShift {
+      0%,100% { background: linear-gradient(to right, black, dimgray); }
+      25%     { background: linear-gradient(to right, darkslategray, midnightblue); }
+      50%     { background: linear-gradient(to right, maroon, darkgreen); }
+      75%     { background: linear-gradient(to right, cyan, #dc143c); }
+    }
+
+    /* Outer glow pulse */
+    @keyframes outerGlow {
+      0%, 100% { box-shadow: 0 0 60px black, 0 0 120px dimgray; }
+      25%      { box-shadow: 0 0 60px darkslategray, 0 0 120px midnightblue; }
+      50%      { box-shadow: 0 0 60px maroon, 0 0 120px darkgreen; }
+      75%      { box-shadow: 0 0 60px cyan, 0 0 120px #dc143c; }
+    }
+
+    /* Positioning for form inside box */
+    .devo {
+      position: absolute;
+      left: 50%;
+      top: 75%;
+      transform: translate(-50%, -50%);
+    }
+
+    /* Background image */
+    body {
+  background: url("images/16-wallhaven.jpg") no-repeat bottom center fixed;
+  background-size: cover;
+  font-family: 'Open Sans', sans-serif;
+  color: #dcdcdc;
+  margin: 0;
+  height: 100vh;
+  width:100%;
+}
+
+    /* Input + button styling */
+    input[type="password"]{
+      padding: 8px;
+      border-radius: 9px;
+      border: 2px solid darkslategray;
+      margin: 5px;
+	  box-shadow: 0 0 10px #111;
+	  }
+
+    .sub-mit {
+	  width:90px;
+	  height:35;
+     
+      color: #fff;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 10px #111;
+	  font-size: 14px;
+	  padding: 8px;
+	  border-radius: 9px;
+	  border: 2px solid darkslategray;
+	 
+	  background: linear-gradient(-45deg, #0b0c10, #111, #2e8b57, #dc143c, #00ffff);
+      background-size: 400% 400%;
+      animation: gradientShift 10s ease infinite;
+    }
+
+     .sub-mit:hover {
+	width:750px;
+	height:750px;
+	border-radius:50%;
+      box-shadow: 0 0 2000px cyan, 0 0 2000px cyan;
+      border-color:cyan;
+      background: #00ffff;
+      color: #0b0c10;
+    }
+	
+
+    h1,h2 {
+      text-align: center;
+    }
+	
+	h2{
+	font-size:55px;
+	}
+	
+	.input-container {
+  position: relative;
+  margin: 10px;
+}
+
+.input-container input {
+  width: 225px;
+  padding: 8px;
+  border: 2px solid darkslategray;
+  border-radius: 6px;
+  background: transparent;
+  color: #111;
+  font-size: 14px;
+}
+
+.input-container label {
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  color: darkslategray;
+  font-size: 18px;
+  pointer-events: none;
+  transition: 0.3s ease all;
+}
+
+/* When input is focused or has text */
+.input-container input:focus + label,
+.input-container input:valid + label {
+  top: -9px;
+  left: 8px;
+  font-size: 14px;
+  color: cyan;
+}
+
+.passform {
+  display: flex;
+  align-items: center;   /* vertically centers them */
+  justify-content: center; /* keeps them centered horizontally */
+  gap: 2px;             /* space between input and button */
+}
+
+@media (max-width:600px){
+
+	body{
+		background-position:center;
+		background-size:110% 100%;
+	}
+
+	.poppins h1 { font-family: 'Poppins', sans-serif; font-size: 300%;}
+    .lobster h1 { font-family: 'Lobster', cursive; font-size: 300%;}
+	h2{font-size:320%;}
+	
+	.dev{
+		height:28%;
+		width:90%;
+	}
+}
+
+  </style>
+  <script>
+  function passcheck() {
+    var input = document.getElementById('pass1').value;
+
+    if (input === "02122009") {
+      alert('I am impressed, you are remembering what I said, well done 😊. Click "OK" to continue...');
+      sessionStorage.setItem("authenticated", "true");
+      window.location.href = "Birthday-wish.html"; // redirect to Birthday page
+      return false;
+    } 
+    else if (input === "90022120") {
+      alert('Access granted to Inbox 📬. Click "OK" to continue😊...');
+      sessionStorage.setItem("authenticated", "true");
+      window.location.href = "public/chatapp.html"; // redirect to Inbox page
+      return false;
+    } 
+    else {
+      alert('You have forgotten what I said to you 😠. Wrong Password, Try Again. (Hint for 1st: I Told U; Hint for 2nd:மாத்தி யோசி)');
+      return false;
+    }
+  }
+
+  // Force reload when coming back
+  if (performance.navigation.type === performance.navigation.TYPE_BACK_FORWARD) {
+    location.reload();
+  }
+</script>
+
+<body>
+  <div class="lobster">
+    <h1 class="gradient-text">Welcome to Oni’s Page...<br>(˶ > ᴗ •́ ˶)</h1>
+  </div>
+
+  <div class="dev">
+    <div class="poppins">
+      <h2 class="gradient-text">Enter Password</h2>
+    </div>
+    <div class="devo">
+      <form class="passform" onsubmit="return passcheck()" aria-label="Password form">
+        <div class="input-container">
+          <input type="password" id="pass1" required aria-label="Password input">
+          <label for="pass1">Password</label>
+        </div>
+        <div class="gradient-btn">
+          <input class="sub-mit" type="submit" value="Submit" aria-label="Submit button">
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

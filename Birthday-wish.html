@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Birthday Wish</title>
+  <!-- Font Awesome 4.7 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+  <!-- Playfair Display Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Cinzel&family=Great+Vibes&family=Shadows+Into+Light&display=swap" rel="stylesheet">
+  <style>
+   
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    } 
+	
+	.table1{
+	  position:absolute;
+	  top:50%;
+	  left:50%;
+	  transform:translate(-50%, -50%);
+	  padding:10px;
+	}
+	
+	.vidimg{
+	  height:600px; 
+	  width:auto;
+	  padding:0;
+	  margin:0;
+	}
+
+    body {
+      background: url('images/WhatsApp Image 2025-11-28 at 4.21.26 PM.png');
+      background-size: 300px auto;
+      font-family: 'Playfair Display', serif;
+    }
+	
+	h1{
+	  font-size:50px;
+	}
+
+    .bc {
+	  height:80px;
+	  width:100%; 
+	  font-size:60px;
+      position: sticky;
+      top: 0;
+	  z-index:2;
+	  color:navy;
+    }
+
+    .main {
+      height: 720px;
+      border: 3px solid navy;
+      background: url('images/63649831-happy-birthday-lettering-and-doodle-seamless-pattern-vector-illustration-on-white-background-funny.jpg');
+      background-size: 400px auto;
+	  position:relative;
+	  top:-4px;
+    }
+
+    .devo {
+	  bottom:0;
+      height:470px;
+      border: 3px solid navy;
+      background: url('images/8jqq_vqxg_230323.jpg');
+      background-size: 400px auto;
+      position: relative;
+    }
+
+    .dev {
+      line-height: 70px;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+	  width:80%;
+	  	 
+    }
+
+    /* Audio button positioning */
+    .sticky-btn {
+      position: absolute;        /* start centered */
+      left: 75%;
+      top: 660px;                /* adjust vertical position */
+      transform: translateX(-50%);
+      transition: all 1s ease; /* smooth transition */
+      z-index: 1000;
+    }
+
+    .sticky-btn.fixed {
+      position: fixed;           /* stick to viewport */
+      top: 1px;                 /* top-right corner */
+      right: 20px;
+      left: auto;
+      transform: none;
+    }
+
+    /* Glowing button styles */
+    .btn {
+      position: absolute;
+      left: 50%;
+      top: 52%;
+      transform: translate(-50%, -50%);
+      background-color: transparent;
+      color: #fff;
+      font-size: 85px;
+      border: none;
+      border-radius: 50%;
+      display: block;
+      margin: 0 auto;
+      opacity: .3;
+      transition: all linear .2s;
+      cursor: pointer;
+    }
+	
+    .btn:hover { 
+	  opacity: 1; 
+	}
+	
+    .fa-pause-circle-o { 
+	  display: none; 
+	}
+
+    .abc {
+      width: 80px;
+      height: 80px;
+      background: #111;
+      color: #fff;
+      font-size: 85px;
+      border-radius: 50%;
+      cursor: pointer;
+      position: relative;
+      z-index: 1;
+      animation: outerGlow 6s ease-in-out infinite;
+    }
+	
+    .abc::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      padding: 14px;
+      background: linear-gradient(to right, red, blue);
+      background-size: 200% 200%;
+      animation: borderShift 6s ease-in-out infinite;
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+              mask-composite: exclude;
+      z-index: -1;
+    }
+	
+    @keyframes borderShift {
+      0%   { background: linear-gradient(to right, red, blue); }
+      25%  { background: linear-gradient(to right, orange, green); }
+      50%  { background: linear-gradient(to right, yellow, violet); }
+      75%  { background: linear-gradient(to right, cyan, pink); }
+      100% { background: linear-gradient(to right, red, blue); }
+    }
+	
+    @keyframes outerGlow {
+      0%, 100% { box-shadow: 0 0 40px red, 0 0 80px blue; }
+      25%      { box-shadow: 0 0 40px orange, 0 0 80px green; }
+      50%      { box-shadow: 0 0 40px yellow, 0 0 80px violet; }
+      75%      { box-shadow: 0 0 40px cyan, 0 0 80px pink; }
+    }
+	
+	table{
+		height:90%;
+		width:60%;
+		background-color:green;
+		line-height:60px;
+	}
+	
+	.fontsize{
+	font-size:63px;
+	}
+	
+	.psize{
+	font-size: 90px;
+	color:maroon;
+	line-height:90px;
+	}
+	
+
+		.itruely {
+  font-size:48px;
+  text-align: justify;        /* aligns text evenly left and right */
+  text-align-last: justify;   /* forces the last line to align too */
+  text-justify: inter-word;   /* distributes spaces between words */
+  hyphens: auto;              /* enables automatic hyphenation */
+  word-break: normal;         /* allows natural word breaks */
+  overflow-wrap: break-word;  /* ensures wrapping works across browsers */
+  line-height: 1.6;           /* comfortable spacing like in novels */
+  margin: 20px;               /* breathing room around the paragraph */
+  width:100%;
+  text-indent:3em;          /* indents the first line like in novels */
+}
+
+	
+	.f1 {
+      font-family: 'Pacifico', cursive;
+      color: #8e0039;
+      font-size: 80px;
+      font-weight: bold;
+      text-shadow: 2px 2px 5px #FFD700;
+	}
+	
+	
+	.f2 {
+      font-family: 'Cinzel', serif;
+      color: #8e0039;
+	  font-size:60px;
+    }
+    .f3 {
+      font-family: 'Great Vibes', cursive;
+      color: #006400;
+      font-size:60px;
+	  font-weight: bold;
+    }
+    .f4 {
+      font-family: 'Shadows Into Light', cursive;
+      color: #FFD700;
+	  font-size:65px;
+	  font-weight: bold;
+    }
+	.f5 {
+	  color:#8e0039;
+	  font-size:60px;
+	  font-weight: bold;
+	}
+	
+	.btn1{
+	  width:400px;
+	  height:50PX;
+     
+      color:#111;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 10px #111;
+	  font-size: 20px;
+	  padding: 8px;
+	  border-radius: 9px;
+	  border: 2px solid darkslategray;
+	  position:absolute;
+	  right:0;
+	  margin:30px;
+	  background: linear-gradient(-45deg, #0b0c10, #111, #2e8b57, #dc143c, #00ffff);
+      background-size: 400% 400%;
+      animation: gradientShift 6s ease infinite;
+    }
+	
+	 @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+	
+	.btn1:hover {
+	border-radius:12px;
+      box-shadow: 0 0 20px cyan, 0 0 20px cyan;
+      border-color:cyan;
+      background: #00ffff;
+      color: #0b0c10;
+	  }
+	 
+	
+@media (max-width:600px){
+	
+	body{
+		background-size: 150px auto;
+	}
+	
+	.bc{
+		width:100%;
+		height:55px;
+		Font-size:40px;
+		background-color:#111;
+		color:navy;
+	}
+	
+	.main{
+	      background-size: 250px auto;
+	  position:relative;
+	  top:-4px;
+		height:450px;
+	}
+	
+	table{
+		height:25%; 
+		width:80%;
+		background-color:green;
+		 line-height:30px;
+	}
+	
+	.vidimg{
+	  height:300px; 
+	  width:auto;
+	  padding:0;
+	  margin:0;
+	 
+	}
+	.fontsize{
+	font-size:26px;
+
+	}
+	
+	.psize{
+	Font-size:40px;
+	line-height:25px;
+	}
+	
+	.sticky-btn {
+	top:380px;
+	left:81%;
+	}
+	
+	.abc{
+		height:55px;
+		width:55px;
+		 background: #111;
+      color: #fff;
+      font-size: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      position: relative;
+      z-index: 1;
+      animation: outerGlow 6s ease-in-out infinite;
+	  padding:-10px;
+	}
+	
+	.btn{
+		Font-size:50px;
+		height:65px;
+		width:65px;
+	}
+	
+	h1{
+		 font-size:27px;
+	}
+	
+.itruely {
+  font-size:25px;
+  text-align: justify;        /* aligns text evenly left and right */
+  text-align-last: justify;   /* forces the last line to align too */
+  text-justify: inter-word;   /* distributes spaces between words */
+  hyphens: auto;              /* enables automatic hyphenation */
+  word-break: normal;         /* allows natural word breaks */
+  overflow-wrap: break-word;  /* ensures wrapping works across browsers */
+  line-height: 1.6;           /* comfortable spacing like in novels */
+  margin: 20px;               /* breathing room around the paragraph */
+  width:100%;
+  text-indent:3em;            /* indents the first line like in novels */
+}
+
+
+
+	.devo {
+	  
+      height:250px;
+      border: 3px solid navy;
+      background: url('images/8jqq_vqxg_230323.jpg');
+      background-size: 230px auto;
+      position: relative;
+      bottom:0;
+    }
+
+    .dev {
+      line-height: 40px;
+      position: absolute;
+      left: 48%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+	  width:95%;
+	  margin:10px;
+	}
+	
+	 .f1 {
+      font-family: 'Pacifico', cursive;
+      color: #8e0039;
+      font-size: 30px;
+      font-weight: bold;
+      text-shadow: 2px 2px 5px #FFD700; /* glow effect */
+    }
+    .f2 {
+      font-family: 'Cinzel', serif;
+      color: #8e0039;
+      font-size: 23px;
+    }
+    .f3 {
+      font-family: 'Great Vibes', cursive;
+      color: #006400;
+      font-size: 21px;
+	  font-weight: bold;
+    }
+    .f4 {
+      font-family: 'Shadows Into Light', cursive;
+      color: #FFD700;
+      font-size: 28px;
+	  font-weight: bold;
+    }
+	.f5 {
+      color: #8e0039;
+      font-size: 16px;
+	  font-weight: bold;
+    }
+	
+	.btn1{
+	  width:200px;
+	  height:35PX;
+	  position:absolute;
+	  right:0;
+	  margin:20px;
+	  Font-size:16px;
+	}
+}
+	
+  </style>
+</head>
+<body>
+  <div class="bc">
+    <marquee scrollamount="13px" bgcolor="black"> 
+      <span style="color: #fff; text-shadow: 0 0 5px #0ff, 0 0 10px #0ff, 0 0 20px #0ff, 0 0 40px #0ff;"><b>BLACK &nbsp CUTIE</b> 🥰💙</span> 
+    </marquee>
+  </div>
+
+  <!-- Audio Button -->
+  <div class="sticky-btn">
+    <audio id="mymusic" src="Devon-song1.mp3" loop=""></audio>
+    <div class="abc">
+      <button class="btn">
+        <i class="fa fa-play-circle-o"></i>
+        <i class="fa fa-pause-circle-o"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Birthday Content -->
+  <center>
+    <div class="main">
+      <center>
+        <table class="table1" bordercolor="deepskyblue" >
+          <tr>
+            <td><img src="images/Vidthiyashalini.jpg"  alt="VS" class="vidimg"></td>
+            <th>
+              <center>
+                <span class="fontsize">💕 Wishing you a birthday as beautiful as your soul and as bright as your smile, </span><br>
+                <span class="psize" >My Dear<br> Bestie <br> 💞</span>
+              </center>
+            </th>
+          </tr>
+        </table>
+      </center>
+    </div><h1>2025-12-02</h1><br><br><br>
+    <center>
+      <h1>
+        On this bright and joyful day,<br>
+        May happiness light your way.<br>
+        Laughter, love, and dreams come true,<br>
+        This birthday shines because of you.<br>
+        And my wish, from heart so deep,<br>
+        Is the best you’ll ever keep.
+      </h1>
+    </center><br><br><br><br><br>
+  </center>
+    <span class="itruely" style="text-indent: 80px;">
+      I truly hope this birthday brings you endless happiness, joy and love. 
+      May you feel how special today is, and may it be filled with unforgettable moments. 
+      My wish for you comes straight from the heart. 
+      I wish that my message reaches you as the warmest and most heartfelt wish you’ve ever received.
+    </span>
+  <center>
+    <div class="devo">
+      <div class="dev">
+        <center>
+          <b>
+            <p style="text-align:center; padding:20px; ">
+          
+  
+<span class="f1">🌟 ALL THE BEST 🎓</span><br> 
+<span class="f2">🌸 VIDTHIYASHALINI</span><br> 
+<span class="f2">for your A/L studies</span>
+<span class="f3">(BIO🧬)🍃 </span>
+<span class="f5">&</span><br> 
+<span class="f2">🔬 higher studies to become a...👩‍⚕️</span><br> 
+<span class="f4">🩺 (DOCTOR) 💓️</span>
+
+            </p>
+          </b>
+        </center>
+      </div>
+    </div>
+  </center>
+
+  <!-- Plain JavaScript -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const playIcon = document.querySelector(".fa-play-circle-o");
+      const pauseIcon = document.querySelector(".fa-pause-circle-o");
+      const audio = document.getElementById("mymusic");
+      const stickyBtn = document.querySelector(".sticky-btn");
+
+      // Play button logic
+      playIcon.addEventListener("click", function() {
+        playIcon.style.display = "none";
+        pauseIcon.style.display = "inline-block";
+        audio.play();
+      });
+
+      // Pause button logic
+      pauseIcon.addEventListener("click", function() {
+        pauseIcon.style.display = "none";
+        playIcon.style.display = "inline-block";
+        audio.pause();
+      });
+
+      // Scroll logic for sticky button
+      window.addEventListener("scroll", function() {
+        const scrollPos = window.scrollY;
+        if (scrollPos > 200) {
+          stickyBtn.classList.add("fixed");
+        } else {
+          stickyBtn.classList.remove("fixed");
+        }
+      });
+    });
+	
+	// Authentication check
+    if (sessionStorage.getItem("authenticated") !== "true") {
+      alert("You must enter the password first!");
+      window.location.href = "lock.html";
+    }
+	
+    // Clear session when leaving
+    window.addEventListener("beforeunload", () => {
+      sessionStorage.removeItem("authenticated");
+    });
+  </script>
+  
+  <a href="button_collections.html">
+  <button class="btn1"><b>Continue</b></button>
+  </a>
+  
+</body>
+</html>

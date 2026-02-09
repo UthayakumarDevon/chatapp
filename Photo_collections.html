@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Photo Collections</title>
+<style>
+:root {
+  /* Light theme variables */
+  --card-bg: #f4f6f9;
+  --card-shadow: rgba(0, 0, 0, 0.15);
+  --accent-color: #0077ff;
+  --text-color: #444;
+  --page-bg: #ffffff;
+}
+
+.dark-mode {
+  /* Dark theme overrides */
+  --card-bg: #1e1e1e;
+  --card-shadow: rgba(0, 0, 0, 0.6);
+  --accent-color: #66aaff;
+  --text-color: #f0f0f0;
+  --page-bg: #121212;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+html {
+  font-size: 14px;
+  background: var(--page-bg);
+  color: var(--text-color);
+  font-family: system-ui;
+  line-height: 1.42;
+  overscroll-behavior-x: none;
+  overflow: auto;
+
+  /* Smooth transition for theme changes */
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+main {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding-bottom: 10rem;
+  position: relative;
+}
+
+p {
+  padding:1em;
+  transition: color 0.5s ease;
+}
+
+#demo {
+  padding: 2em;
+  border: 4px solid cadetblue;
+  background: var(--card-bg);
+  transition: background-color 0.5s ease, border-color 0.5s ease;
+}
+
+/* Toggle button */
+#toggle-dark {
+  display: inline-block;
+  margin: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 1rem;
+  border: none;
+  cursor: pointer;
+  background: var(--accent-color);
+  color: white;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+#toggle-dark:hover {
+  background: #0055cc;
+}
+
+
+
+ /* Accordion wrapper */
+    .accordion-wrapper {
+      display: flex;
+      flex-direction: row;
+      gap: 1rem;
+      width: min-content;
+      margin: 0 auto;
+    }
+
+
+
+
+/* Details element styling */
+details {
+  display: flex;
+  flex-direction: row;
+  background: var(--card-bg);
+  color: var(--text-color);
+  border-radius: 2rem;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+  --open-size: min(30vw, 300px);
+  height: 530px;
+  transition: all 1s ease, background-color 0.5s ease, color 0.5s ease;
+  box-shadow: 0 8px 16px var(--card-shadow);
+}
+
+details[open] {
+  width: var(--open-size);
+  aspect-ratio: 9/16;
+  height: auto;
+  outline-offset: 3px;
+  background: linear-gradient(135deg, #ffffff, #e6f0ff);
+  outline: 3px solid cadetblue;
+}
+
+.dark-mode details[open] {
+  background: linear-gradient(135deg, #222, #333);
+  outline: 3px solid silver;
+}
+
+
+/* Image styling with smooth fade */
+details summary img {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  z-index: -1;
+  filter: brightness(0.5);
+  transition: filter 0.5s ease, aspect-ratio 0.5s ease;
+}
+
+details[open] summary img {
+  filter: brightness(1);
+  opacity: 1;
+  transform: scale(1.02); /* slight zoom */
+  transition: opacity 0.8s ease, filter 0.5s ease, transform 0.8s ease;
+  aspect-ratio: 9 / 16;
+}
+
+
+
+/* Summary styling */
+summary {
+  padding: 1rem 1em;
+  width: 5rem;
+  flex-shrink: 0;
+  text-align: center;
+}
+
+summary span {
+  display: grid;
+  place-content: center;
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: rgb(0 0 0 / 0.5);
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+summary span:hover {
+  transform: scale(1.2);
+  background: var(--accent-color);
+  color: white;
+}
+
+summary:focus { outline: none; }
+
+.details-content-wrapper {
+  padding: 1.5rem 1em;
+  width: var(--open-size);
+  transition: color 0.5s ease;
+  
+}
+
+/* Smooth text animation with delay */
+.details-content-wrapper p {
+  transform: translateY(2rem);
+  opacity: 0;
+  transition: all 0.5s ease;
+  transition-delay: 0.5s;
+}
+
+details[open] .details-content-wrapper p {
+  transform: none;
+  opacity: 1;
+  transition-delay: 0.5s;
+  width:85%;
+  font-size:22px;
+  line-height:25px;
+}
+
+/* Animation for expanding content */
+::details-content {
+  transition: width 01s ease, content-visibility 0.5s ease allow-discrete;
+  width: 0;
+}
+
+[open]::details-content {
+  width: var(--open-size);
+}
+
+.carousel, .carousel1, .carousel2, .carousel3, .carousel4{
+		width:100%;
+		overflow-x:auto;
+		margin:3em auto;
+		display:flex;
+		gap:0.5em;
+		scroll-behavior:smooth;
+		background-color: midnightblue;
+		border-radius:12px;
+		scroll-snap-type:x mandatory;
+		scroll-marker-group:after;
+	}
+	
+	.carousel{
+		anchor-name: --carousel;
+	}
+	
+	.carousel1{
+		anchor-name: --carousel1;
+	}
+	
+	.carousel2{
+		anchor-name: --carousel2;
+	}
+	
+	.carousel3 {
+		anchor-name: --carousel3;
+	}
+	
+	.carousel4{
+		anchor-name: --carousel4;
+	}
+	
+	.carousel::scroll-marker-group, 
+	.carousel1::scroll-marker-group,
+	.carousel2::scroll-marker-group,
+	.carousel3::scroll-marker-group,
+	.carousel4::scroll-marker-group{
+		display:flex;
+		justify-content:center;
+		gap: .5em;
+	}
+	
+	.card::scroll-marker {
+		content: '';
+		height:1em;
+		width:1em;
+		background-color:deepskyblue;
+		border-radius:50%;
+		filter:brightness(.5);
+	}
+	
+	.card::scroll-marker:target-current{
+		background-color:#4B0082;
+		filter:brightness(1);
+	}
+	
+	.carousel::-webkit-scrollbar, 
+	.carousel1::-webkit-scrollbar, 
+	.carousel2::-webkit-scrollbar,
+	.carousel3::-webkit-scrollbar,
+	.carousel4::-webkit-scrollbar{
+		display:none;
+	}
+	
+	.carousel::scroll-button(right), .carousel::scroll-button(left), 
+	.carousel1::scroll-button(right), .carousel1::scroll-button(left),
+	.carousel2::scroll-button(right), .carousel2::scroll-button(left),
+	.carousel3::scroll-button(right), .carousel3::scroll-button(left),
+	.carousel4::scroll-button(right), .carousel4::scroll-button(left){
+		content:'→';
+		border:4px solid #8F00FF;
+		background-color: #4B0082;
+		font-family:Consolas;
+		font-size:3rem;
+		color:#fff;
+		height:60px;
+		width:60px;
+		border-radius:50%;
+		padding-bottom:.1em;
+		cursor:pointer;
+		position:fixed;
+		position-area:right center;
+		transform:translate(-50%);
+	}
+	
+	.carousel::scroll-button(right), .carousel::scroll-button(left){
+		position-anchor: --carousel;
+	}
+	
+	.carousel1::scroll-button(right), .carousel1::scroll-button(left){
+		position-anchor: --carousel1;
+	}
+	
+	.carousel2::scroll-button(right), .carousel2::scroll-button(left){
+		position-anchor: --carousel2;
+	}
+	
+	.carousel3::scroll-button(right), .carousel3::scroll-button(left){
+		position-anchor: --carousel3;
+	}
+	
+	.carousel4::scroll-button(right), .carousel4::scroll-button(left){
+		position-anchor: --carousel4;
+	}
+	
+	.carousel::scroll-button(left),
+	.carousel1::scroll-button(left),
+	.carousel2::scroll-button(left),
+	.carousel3::scroll-button(left),
+	.carousel4::scroll-button(left){
+		content:'←';
+		position-area: left center;
+		transform:translate(50%);
+	}
+	
+	.carousel::scroll-button(right):disabled, .carousel::scroll-button(left):disabled{
+		opacity:0.5;
+		cursor:auto;
+	}
+	.carousel1::scroll-button(right):disabled, .carousel1::scroll-button(left):disabled{
+		opacity:0.5;
+		cursor:auto;
+	}
+	.carousel2::scroll-button(right):disabled, .carousel2::scroll-button(left):disabled{
+		opacity:0.5;
+		cursor:auto;
+	}
+	.carousel3::scroll-button(right):disabled, .carousel3::scroll-button(left):disabled{
+		opacity:0.5;
+		cursor:auto;
+	}
+	.carousel4::scroll-button(right):disabled, .carousel4::scroll-button(left):disabled{
+		opacity:0.5;
+		cursor:auto;
+	}
+	
+	.imagesize{
+		height:600px;
+		width:auto;
+		border-radius:12px;
+		border:4px solid darkslategray;
+	}
+	
+	.card{
+		scroll-snap-align:start;
+		aspect-ratio:9/16;
+		flex:0 0 20em;
+		padding:1em;
+		border-radius:.5em;
+		text-align:center;
+		align-content:center;
+	}
+	
+	 .carousel-title {
+      text-align: center;
+      font-size: 2rem;
+      font-family: Consolas, sans-serif;
+      font-weight: bold;
+      color: #fff;
+      margin-bottom: 1em;
+      background-color: rgba(25, 25, 112, 0.8); /* midnightblue tint */
+      padding: 0.5em;
+      border-radius: 12px;
+    }
+	
+	.carousel-wrapper {
+	  padding: 3rem;
+		}
+
+
+@media (max-width: 600px) {
+
+
+		.card{
+			flex: 0 0 100%;
+		}
+
+		.carousel-wrapper {
+			padding: 3rem;
+		}
+
+ .accordion-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      width:100%;
+      margin: 0 auto;
+    }
+
+  details[open],
+  .dark-mode details[open] {
+    width: 100% !important;   /* same width for open items */
+    aspect-ratio:9/16;       /* let content define height */
+  }
+  
+
+  details{
+	width:100%;
+	height:auto;
+  }
+  
+  ::details-content {
+  transition: height .5s ease, content-visibility 0.5s ease allow-discrete;
+  width: 0;
+  }
+  
+  
+  details[open] .details-content-wrapper p {
+  transform: none;
+  opacity: 1;
+  transition-delay: 0.5s;
+  width:250%;
+  line-height:25px;
+}
+	
+	h3{
+		font-size:18px;
+		width:200%;
+	}
+	
+	.carousel::scroll-button(right):disabled{
+		display:none;
+	}
+	
+	.carousel1::scroll-button(right):disabled{
+		display:none;
+	}
+	.carousel2::scroll-button(right):disabled, .carousel2::scroll-button(left):disabled{
+		opacity:0.5;
+		cursor:auto;
+	}
+	.carousel3::scroll-button(right):disabled, .carousel3::scroll-button(left):disabled{
+		opacity:0.5;
+		cursor:auto;
+	}
+	.carousel4::scroll-button(right):disabled, .carousel4::scroll-button(left):disabled{
+		opacity:0.5;
+		cursor:auto;
+	}
+	
+}
+
+.back-btn {
+      background-color: transparent;
+      color: #fff ;
+      padding: 4px 8px;
+      border: 2px solid #36454F ;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 15px;
+	  opacity:0.8;
+      transition: background-color 0.3s ease;
+	  margin:10px;
+    }
+
+    .back-btn:hover {
+      background-color: #D3D3D3 ;
+    }
+
+    .back-btn:active {
+      background-color: #696969;
+    }
+
+</style>
+</head>
+<body>
+<main>
+  <button id="toggle-dark">🌙 Toggle Dark Mode</button>
+  <div id="demo">
+    <div class="accordion-wrapper">
+	
+      <details name="accordion" id="boating">
+        <summary>
+          <span>✏️</span>
+          <img draggable="false" src="images/vidthiyashal.png" alt="Boating image">
+        </summary>
+        <div class="details-content-wrapper">
+          <h3>Teachers' Day 2025</h3>
+          <p style="color: #111; text-shadow: 0 0 5px #0ff, 0 0 10px #0ff, 0 0 20px #0ff, 0 0 40px #0ff;"><b>Nevithiya tr. veeta vechu eduthe photo...</b></p>
+        </div>
+      </details>
+	  
+      <details name="accordion" id="anchoring">
+			<summary>
+				<span>🎭</span>
+				<img draggable=false src="images/WhatsApp Image 2025-11-29 at 7.53.20 PM(1).png" alt="">
+			</summary>
+			<div class="details-content-wrapper">
+				<h3>"Shattered Illusion"</h3>
+				<p style="color: #ff6a00; text-shadow: 0 0 4px #ff6a00, 0 0 8px #ff0000, 0 0 16px #ff0000, 0 0 32px #ff0000;"><b>Naanga grade 10(2024) padikkum poothu, first first aa seithe English Drama.</b></p>
+			</div>
+		</details>
+		
+		<details name="accordion" id="fishing">
+			<summary>
+				<span>🤭</span>
+				<img draggable=false src="images/WhatsApp Image 2025-11-29 at 7.53.20 PM (1).png" alt="">
+			</summary>
+			<div class="details-content-wrapper">
+				<h3>Sivappu kannaadi</h3>
+				<p style="color: white; text-shadow: 0 0 4px red, 0 0 8px red, 0 0 16px red, 0 0 32px red;">Casual pose.📸</p>
+			</div>
+		</details>
+		
+		<details name="accordion" id="lighthouses">
+			<summary>
+				<span>💜</span>
+				<img draggable=false src="images/WhatsApp Image 2025-11-29 at 7.58.38 PM.png" alt="">
+			</summary>
+			<div class="details-content-wrapper">
+				<h3>First Photo</h3>
+				<p style="color: magenta; text-shadow: 0 0 4px blue, 0 0 8px blue, 0 0 16px blue, 0 0 32px blue;"><b>(I think) Nee enakku anuppine unde first 4to.</b></p>
+			</div>
+		</details>
+		
+		<details name="accordion" id="reefs">
+			<summary>
+				<span>🎂</span>
+				<img draggable=false src="images/WhatsApp Image 2025-08-24 at 11.58.20_ee67bf0a(1).png" alt="">
+			</summary>
+			<div class="details-content-wrapper">
+				<h3>🤐...</h3>
+				<p style="color:pink; text-shadow: 0 0 4px purple, 0 0 8px purple, 0 0 16px purple, 0 0 32px purple;"><b>No comments...</b></p>
+			</div>
+		</details>
+		
+		<details name="accordion" id="reefs">
+			<summary>
+				<span>🥰</span>
+				<img draggable=false src="images/WhatsApp Image 2025-11-29 at 7.53.18 PM (1).png" alt="">
+			</summary>
+			<div class="details-content-wrapper">
+				<h3>Bestie 💖</h3>
+				<p style="color: #fff; text-shadow: 0 0 5px #ff0000, 0 0 10px #ff7f00, 0 0 15px #ffff00, 0 0 20px #00ff00, 0 0 25px #0000ff, 0 0 30px #4b0082, 0 0 35px #8f00ff;"><b>Ithu thaan status la pootu naan unnata paechu vendina photo.😁</b></p>
+			</div>
+		</details>
+		
+		<details name="accordion" id="reefs">
+			<summary>
+				<span>😉</span>
+				<img draggable=false src="images/WhatsApp Image 2025-11-29 at 7.53.19 PM.png" alt="">
+			</summary>
+			<div class="details-content-wrapper">
+				<h3>✌️</h3>
+				<p style="color:#ff69b4; text-shadow: 0 0 4px brown, 0 0 8px brown, 0 0 16px brown, 0 0 32px brown;"><b>Sorry.com. unde permission illaame photo eduthuttan!!!</b></p>
+			</div>
+		</details>
+		
+		<details name="accordion" id="reefs">
+			<summary>
+				<span>🧅</span>
+				<img draggable=false src="images/WhatsApp Image 2025-11-29 at 7.53.18 PM.png" alt="">
+			</summary>
+			<div class="details-content-wrapper">
+				<h3>Mahavidyan</h3>
+				<p style="color:maroon; text-shadow: 0 0 4px yellow, 0 0 8px yellow, 0 0 16px yellow, 0 0 32px yellow;"><b>It's me, Devon, Onion🧅.</b></p>
+			</div>
+		</details>
+		
+		<details name="accordion" id="boating">
+        <summary>
+          <span>😍</span>
+          <img draggable="false" src="images/WhatsApp Image 2026-02-05 at 4.51.19 PM.png" alt="Boating image">
+        </summary>
+        <div class="details-content-wrapper">
+          <h3>Friends❣</h3>
+          <p style="color: #111; text-shadow: 0 0 5px #0ff, 0 0 10px #0ff, 0 0 20px #0ff, 0 0 40px #0ff;"><b>The last assemble of us as grade 11A(2025)</b></p>
+        </div>
+      </details>
+	  
+    </div>
+  </div>
+</main>
+
+  <script>
+    /* Accordion behavior: only one open at a time */
+    document.querySelectorAll("details[name='accordion']").forEach((el) => {
+      el.addEventListener("toggle", () => {
+        if (el.open) {
+          document.querySelectorAll("details[name='accordion']").forEach((other) => {
+            if (other !== el) other.removeAttribute("open");
+          });
+        }
+      });
+    });
+
+    /* Dark mode toggle with persistence */
+    const toggleBtn = document.getElementById("toggle-dark");
+    const root = document.documentElement;
+
+    // Load saved theme or system preference
+    if (localStorage.getItem("theme") === "dark" ||
+        (!localStorage.getItem("theme") && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+      root.classList.add("dark-mode");
+    }
+
+    // Toggle theme
+    toggleBtn.addEventListener("click", () => {
+      root.classList.toggle("dark-mode");
+      if (root.classList.contains("dark-mode")) {
+        localStorage.setItem("theme", "dark");
+        toggleBtn.textContent = "☀️ Toggle Light Mode";
+      } else {
+        localStorage.setItem("theme", "light");
+        toggleBtn.textContent = "🌙 Toggle Dark Mode";
+      }
+    });
+  </script>
+
+<div class="carousel-wrapper">
+<div class="carousel-title">🌟 OUR 11 A 🌟</div>
+<div class="carousel">
+ 
+  <div class="card"><img class="imagesize" src="images/WhatsApp Image 2025-11-29 at 7.53.17 PM.png" alt=""></div>
+  <div class="card"><img class="imagesize" src="images/WhatsApp Image 2025-11-29 at 7.53.17 PM (1).png" alt=""></div>
+  <div class="card"><img class="imagesize" src="images/IMG-20260101-WA0013.png" alt=""></div>
+  <div class="card"><img class="imagesize" src="images/Clean Sri Lanka; ilai kanchi 2.png" alt=""></div>
+  <div class="card"><img class="imagesize" src="images/Clean Sri Lanka; ilai kanchi 4.png" alt=""></div>
+  <div class="card"><img class="imagesize" src="images/Clean Sri Lanka; ilai kanchi 1.png" alt=""></div>
+  <div class="card"><img class="imagesize" src="images/Clean Sri Lanka; ilai kanchi.png" alt=""></div>
+</div>
+</div>
+
+<div class="carousel-wrapper">
+<div class="carousel-title">🌟 KAPIL (KASP OF SCIENCE) 🌟</div>
+<div class="carousel1">
+  <div class="card"><img class="imagesize" src="images/WhatsApp Image 2026-02-07 at 9.28.29 PM.png" alt=""></div>
+  <div class="card"><img class="imagesize" src="images/WhatsApp Image 2026-02-07 at 9.26.17 PM.png" alt=""></div>
+  <div class="card"><img class="imagesize" src="images/IMG-20260101-WA0010.png" alt=""></div>
+  <div class="card"><img class="imagesize" src="images/IMG-20260101-WA0009.png" alt=""></div>
+  <div class="card"><img class="imagesize" src="images/IMG-20260101-WA0011.png" alt=""></div>
+</div>
+</div>
+
+<div class="carousel-wrapper">
+<div class="carousel-title">🌟 UR ACHIEVEMENT 🌟</div>
+<div class="carousel4">
+ 
+  <div class="card"><img class="imagesize" src="images/WhatsApp Image 2025-08-24 at 11.53.49_cc462ca9.jpg" alt=""></div>
+  <div class="card"><img class="imagesize" src="images/WhatsApp Image 2025-08-24 at 11.54.02_60405f26.jpg" alt=""></div>
+  <div class="card"><img class="imagesize" src="images/WhatsApp Image 2025-08-24 at 12.27.48_f3105a3e.jpg" alt=""></div>
+</div>
+</div>
+
+<div class="carousel-wrapper">
+<div class="carousel-title">🌟 OUR 9A 🌟</div>
+<div class="carousel2">
+ 
+  <div class="card"><img class="imagesize" src="images/IMG-20251220-WA0003.png" alt=""></div>
+  <div class="card"><img class="imagesize" src="images/IMG-20251220-WA0015.png" alt=""></div>
+  <div class="card"><img class="imagesize" src="images/IMG-20251220-WA0018.png" alt=""></div>
+  <div class="card"><img class="imagesize" src="images/IMG-20251220-WA0023.png" alt=""></div>
+  <div class="card"><img class="imagesize" src="images/IMG-20251220-WA0016.png" alt=""></div>
+  <div class="card"><img class="imagesize" src="images/IMG-20251220-WA0017.png" alt=""></div>
+  <div class="card"><img class="imagesize" src="images/IMG-20250810-WA0040.png" alt=""></div>
+  <div class="card"><img class="imagesize" src="images/IMG-20250810-WA0035.png" alt=""></div>
+  <div class="card"><img class="imagesize" src="images/IMG-20251220-WA0009.png" alt=""></div>
+  <div class="card"><img class="imagesize" src="images/IMG-20251220-WA0019.png" alt=""></div>
+  <div class="card"><img class="imagesize" src="images/IMG-20251220-WA0001.png" alt=""></div>
+  <div class="card"><img class="imagesize" src="images/IMG-20251220-WA0002.png" alt=""></div>
+  <div class="card"><img class="imagesize" src="images/IMG-20251220-WA0026.png" alt=""></div>
+</div>
+</div>
+
+<div class="carousel-wrapper">
+<div class="carousel-title">🌟 9A TRIP TO POLANNARUWA 🌟</div>
+<div class="carousel3">
+ 
+  <div class="card"><img class="imagesize" src="images/IMG-20251220-WA0010.png" alt=""></div>
+  <div class="card"><img class="imagesize" src="images/IMG-20251220-WA0008.png" alt=""></div>
+  <div class="card"><img class="imagesize" src="images/IMG-20251220-WA0014.png" alt=""></div>
+  <div class="card"><img class="imagesize" src="images/IMG-20251220-WA0011.png" alt=""></div>
+  <div class="card"><img class="imagesize" src="images/IMG-20251220-WA0024.png" alt=""></div>
+  <div class="card"><img class="imagesize" src="images/IMG-20251220-WA0027.png" alt=""></div>
+  <div class="card"><img class="imagesize" src="images/IMG-20251220-WA0006.png" alt=""></div>
+  <div class="card"><img class="imagesize" src="images/IMG-20251220-WA0005.png" alt=""></div>
+  <div class="card"><img class="imagesize" src="images/IMG-20251220-WA0007.png" alt=""></div>
+  <div class="card"><img class="imagesize" src="images/IMG-20251220-WA0004.png" alt=""></div>
+  <div class="card"><img class="imagesize" src="images/IMG-20251220-WA0013.png" alt=""></div>
+  <div class="card"><img class="imagesize" src="images/IMG-20251220-WA0021.png" alt=""></div>
+  <div class="card"><img class="imagesize" src="images/IMG-20251220-WA0022.png" alt=""></div>
+</div>
+</div>
+
+<button class="back-btn" onclick="history.back()">⬅ Back</button>
+
+</body>
+</html>

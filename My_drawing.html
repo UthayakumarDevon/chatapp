@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>My Drawing</title>
+    <style>
+        
+		
+		body { 
+			position: relative; 
+			margin: 0; 
+			height: 100vh; 
+			overflow: hidden; 
+		} 
+		
+		body::before { 
+			content: ""; 
+			position: absolute; 
+			top: 0; left: 0; 
+			width: 100%; 
+			height: 100%; 
+			background-image: url("images/HD-wallpaper-neon-design-green-leaves-leaves-nature-neon-lights0.png"); 
+			background-position: center; 
+			background-size: 110% 120%; 
+			filter: blur(1px); /* blur only the background */ 
+			z-index: -1; /* keep it behind content */ 
+		}
+
+        .card {
+            margin: 0 auto;
+            padding: 2px;
+            width:auto;
+            background: #1c1f2b;
+            border-radius: 10px;
+            position: relative;
+            color: white;
+			position:absolute;
+			top:50%;
+			left:50%;
+			transform:translate(-50%, -50%);
+            display: flex;              /* enable flexbox */
+            justify-content: center;    /* center horizontally */
+            align-items: center;        /* center vertically */
+        }
+
+        .card img {
+            max-width: 100%;            /* keep image responsive */
+            border-radius: 10px;
+        }
+
+        @property --angle {
+            syntax: "<angle>";
+            initial-value: 0deg;
+            inherits: false;
+        }
+
+        .card::after,
+        .card::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: conic-gradient(
+                from var(--angle),
+                #ff4545,
+                #00ff99,
+                #006aff,
+                #ff0095,
+                #ff4545
+            );
+            border-radius: 10px;
+            z-index: -1; /* sits above the image */
+            padding: 3px;
+            animation: 2s spin linear infinite;
+        }
+
+        .card::before {
+            filter: blur(1.5rem);
+        }
+
+        @keyframes spin {
+            from {
+                --angle: 0deg;
+            }
+            to {
+                --angle: 360deg;
+            }
+        }
+		
+		span{
+			color:aqua;
+			backdrop-filter:blur(3px);
+			font-weight:bold;
+			font-size:24px;
+			text-shadow: 2px 2px 1px rgba(0,0,0,01);
+		}
+		
+	.back-btn {
+      background: transparent;
+      color: #fff ;
+      padding: 4px 8px;
+      border: 2px solid #36454F ;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 15px;
+	  opacity:0.8;
+      transition: background-color 0.3s ease;
+	  backdrop-filter:blur(5px);
+    }
+
+    .back-btn:hover {
+      background-color: #D3D3D3 ;
+    }
+
+    .back-btn:active {
+      background-color: #696969;
+    }
+		
+		.imae{
+			height:500px;
+		}
+		
+		@media(max-width:600px){
+			
+			
+			body { 
+			position: relative; 
+			margin: 0; 
+			height: 100vh; 
+			overflow: hidden; 
+		} 
+		
+		body::before { 
+			content: ""; 
+			position: absolute; 
+			top: 0; left: 0; 
+			width: 100// Authentication check
+    if (sessionStorage.getItem("authenticated") !== "true") {
+      alert("You must enter the password first!");
+      window.location.href = "lock.html";
+    }
+	
+    // Clear session when leaving
+    window.addEventListener("beforeunload", () => {
+      sessionStorage.removeItem("authenticated");
+    });%; 
+			height: 100%; 
+			background-image: url("images/HD-wallpaper-neon-design-green-leaves-leaves-nature-neon-lights.png"); 
+			background-position: center; 
+			background-size:160% 130%;
+			filter: blur(1px); /* blur only the background */ 
+			
+			z-index: -1; /* keep it behind content */ 
+		}
+			
+			.imae{
+				height:350px;
+				width:auto;
+			}
+			
+		.card {
+			position:absolute;
+			top:50%;
+			left:50%;
+			transform:translate(-50%, -50%);
+		}
+		
+		span{
+			color:aqua;
+			backdrop-filter:blur(2px);
+			font-weight:bold;
+			font-size:17px;
+			text-shadow: 2px 2px 1px rgba(0,0,0,01);
+		}
+			
+		}
+		
+		
+    </style>
+</head>
+
+<body>
+
+    <div class="card">
+        <img class="imae" src="images/vidthiyashal.png">
+    </div>
+<button class="back-btn" onclick="history.back()">⬅ Back</button>
+<span>09/01/2026 &nbsp 16:36 </span><br>
+<span> Vidthi, ithe naan unde bd ku thaan tharonum endu ninachan. But konjam late aahitu. Sari, last yr(2025) mudiyurathukkulla tharonum endu ninachan. Pirahu thaan yosichan, 3<sup>rd</sup> term exams & O/L exams varuthu... So, ean avalde(unda) mind e disturb pannuvaan enduttu vittutan. & 3<sup>rd</sup> term exam time unmelaye nee innum enna naapakam vechirukkiyaa, naan unde friend thaanaa, unnata itha tharalaamaa endum thonichu(∵ of ur activities😔) Paapam final aa eppa unnata vanthu saeruthu endu 🤭!!  </span>
+
+</body>
+</html>
