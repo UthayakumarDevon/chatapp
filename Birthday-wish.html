@@ -302,10 +302,11 @@
 	  margin:0;
 	 
 	}
-	.fontsize{
-	font-size:26px;
-
-	}
+td {
+  font-size: 8vmin; /* scales with the smaller of width/height */
+  text-align: center;
+  vertical-align: middle;
+}
 	
 	.psize{
 	Font-size:40px;
@@ -496,6 +497,24 @@
 
   <!-- Plain JavaScript -->
   <script>
+	  function fitTextToCell(cell) {
+  let span = cell.querySelector("span");
+  let size = 10;
+  span.style.fontSize = size + "px";
+
+  while (
+    span.scrollWidth <= cell.clientWidth &&
+    span.scrollHeight <= cell.clientHeight
+  ) {
+    size++;
+    span.style.fontSize = size + "px";
+  }
+
+  span.style.fontSize = (size - 1) + "px";
+}
+
+document.querySelectorAll("td").forEach(fitTextToCell);
+
     document.addEventListener("DOMContentLoaded", function() {
       const playIcon = document.querySelector(".fa-play-circle-o");
       const pauseIcon = document.querySelector(".fa-pause-circle-o");
@@ -546,3 +565,4 @@
 </body>
 
 </html>
+
