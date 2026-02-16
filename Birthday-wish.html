@@ -174,7 +174,7 @@
 		line-height:60px;
 	}
 	th {
-  font-size: 3vmax; /* scales with the smaller of width/height */
+  font-size: 4vmax; /* scales with the smaller of width/height */
   text-align: center;
   vertical-align: middle;
 }
@@ -288,10 +288,9 @@
 	}
 	
 	table{
-		height:425px; 
+		height:420px; 
 		width:80%;
 		background-color:green;
-		 line-height:30px;
 	}
 	
 	.vidimg{
@@ -302,7 +301,7 @@
 	 
 	}
 th {
-  font-size: 3vmax; /* scales with the smaller of width/height */
+  font-size: 4vmax; /* scales with the smaller of width/height */
   text-align: center;
   vertical-align: middle;
 }
@@ -353,38 +352,36 @@ th {
 
 
 
-	.devo {
-	  
-      height:250px;
-      border: 3px solid navy;
-      background: url('8jqq_vqxg_230323.jpg');
-      background-size: 230px auto;
-      position: relative;
-      bottom:0;
-    }
+.devo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 250px;
+  border: 3px solid navy;
+  background: url('8jqq_vqxg_230323.jpg') no-repeat center;
+  background-size: cover; /* fills nicely */
+}
 
-    .dev {
-      line-height: 40px;
-      position: absolute;
-      left: 48%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-	  width:95%;
-	  margin:10px;
-	}
+.dev {
+  text-align: center;
+  line-height: 1.6;
+  width: 95%;
+  margin: 10px;
+}
 	
-	 .f1 {
-      font-family: 'Pacifico', cursive;
-      color: #8e0039;
-      font-size: 30px;
-      font-weight: bold;
-      text-shadow: 2px 2px 5px #FFD700; /* glow effect */
-    }
-    .f2 {
-      font-family: 'Cinzel', serif;
-      color: #8e0039;
-      font-size: 23px;
-    }
+.f1 {
+  font-family: 'Pacifico', cursive;
+  color: #8e0039;
+  font-size: clamp(20px, 4vmax, 40px);
+  font-weight: bold;
+  text-shadow: 2px 2px 5px #FFD700;
+}
+
+.f2 {
+  font-family: 'Cinzel', serif;
+  color: #8e0039;
+  font-size: clamp(16px, 2.5vmax, 28px);
+}
     .f3 {
       font-family: 'Great Vibes', cursive;
       color: #006400;
@@ -470,25 +467,19 @@ th {
   <center>
     <div class="devo">
       <div class="dev">
-        <center>
-          <b>
-            <p style="text-align:center; padding:20px; ">
-          
-  
-<span class="f1">🌟 ALL THE BEST 🎓</span><br> 
-<span class="f2">🌸 VIDTHIYASHALINI</span><br> 
-<span class="f2">for your A/L studies</span>
-<span class="f3">(BIO🧬)🍃 </span>
-<span class="f5">&</span><br> 
-<span class="f2">🔬 higher studies to become a...👩‍⚕️</span><br> 
-<span class="f4">🩺 (DOCTOR) 💓️</span>
-
-            </p>
-          </b>
-        </center>
-      </div>
-    </div>
-  </center>
+<div class="devo">
+  <div class="dev">
+    <p>
+      <span class="f1">🌟 ALL THE BEST 🎓</span><br>
+      <span class="f2">🌸 VIDTHIYASHALINI</span><br>
+      <span class="f2">for your A/L studies</span>
+      <span class="f3">(BIO🧬)🍃 </span>
+      <span class="f5">&</span><br>
+      <span class="f2">🔬 higher studies to become a...👩‍⚕️</span><br>
+      <span class="f4">🩺 (DOCTOR) 💓️</span>
+    </p>
+  </div>
+</div>
 
   <!-- Plain JavaScript -->
   <script>
@@ -560,6 +551,7 @@ document.querySelectorAll("td").forEach(fitTextToCell);
 </body>
 
 </html>
+
 
 
 
