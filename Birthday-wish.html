@@ -352,22 +352,25 @@ th {
 
 
 
-.devo {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 250px;
-  border: 3px solid navy;
-  background: url('8jqq_vqxg_230323.jpg') no-repeat center;
-  background-size: cover; /* fills nicely */
-}
+	.devo {
+	  
+      height:250px;
+      border: 3px solid navy;
+      background: url('8jqq_vqxg_230323.jpg');
+      background-size: 230px auto;
+      position: relative;
+      bottom:0;
+    }
 
-.dev {
-  text-align: center;
-  line-height: 1.6;
-  width: 95%;
-  margin: 10px;
-}
+    .dev {
+      line-height: 40px;
+      position: absolute;
+      left: 48%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+	  width:95%;
+	  margin:10px;
+	}
 	
 .f1 {
   font-family: 'Pacifico', cursive;
@@ -551,6 +554,7 @@ document.querySelectorAll("td").forEach(fitTextToCell);
 </body>
 
 </html>
+
 
 
 
