@@ -163,11 +163,23 @@
 		width:60%;
 		background-color:green;
 	}
-.table-text {
-  font-size: calc(1vh + 1vw); /* scales with screen size */
+.table {
+  height: 450px;
+  width: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
-  vertical-align: middle;
+  border: 1px solid #000;
 }
+
+.table-text {
+  max-width: 100%;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  font-size: clamp(16px, 5vw, 80px); /* scales but stays within limits */
+}
+
 
 	
 	.psize{
@@ -291,14 +303,23 @@
 	  margin:0;
 	 
 	}
-.table-text {
-  font-size: calc(1vh + 1vw); /* scales with screen size */
+.table {
+  height: 450px;
+  width: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
-  vertical-align: middle;
+  border: 1px solid #000;
 }
 
+.table-text {
+  max-width: 100%;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  font-size: clamp(16px, 5vw, 80px); /* scales but stays within limits */
+}
 
-	
 	.sticky-btn {
 	top:380px;
 	left:81%;
@@ -472,29 +493,6 @@
 
   <!-- Plain JavaScript -->
   <script>
-
-  function fitTextToContainer(textElement, containerElement) {
-    let fontSize = 10; // start small
-    textElement.style.fontSize = fontSize + "px";
-
-    while (
-      textElement.offsetHeight < containerElement.offsetHeight &&
-      textElement.offsetWidth < containerElement.offsetWidth
-    ) {
-      fontSize++;
-      textElement.style.fontSize = fontSize + "px";
-    }
-
-    // step back one size to avoid overflow
-    textElement.style.fontSize = (fontSize - 1) + "px";
-  }
-
-  const text = document.getElementById("text");
-  const table = document.getElementById("table");
-  fitTextToContainer(text, table);
-
-	  textFit(document.getElementById('table'));
-
 	  function fitTextToCell(cell) {
   let span = cell.querySelector("span");
   let size = 10;
@@ -563,6 +561,7 @@ document.querySelectorAll("td").forEach(fitTextToCell);
 </body>
 
 </html>
+
 
 
 
