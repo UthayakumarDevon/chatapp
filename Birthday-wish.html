@@ -163,25 +163,12 @@
 		width:60%;
 		background-color:green;
 	}
-.table {
-  height: 450px;
-  width: 600px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+	  
+	th {
+  font-size: 4vmax; /* scales with the smaller of width/height */
   text-align: center;
-  border: 1px solid #000;
+  vertical-align: middle;
 }
-
-.table-text {
-  max-width: 100%;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-  font-size: clamp(16px, 5vw, 80px); /* scales but stays within limits */
-}
-
-
-	
 	.psize{
 	color:maroon;
 	}
@@ -303,21 +290,11 @@
 	  margin:0;
 	 
 	}
-.table {
-  height: 450px;
-  width: 600px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+	
+	th {
+  font-size: 4vmax; /* scales with the smaller of width/height */
   text-align: center;
-  border: 1px solid #000;
-}
-
-.table-text {
-  max-width: 100%;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-  font-size: clamp(16px, 5vw, 80px); /* scales but stays within limits */
+  vertical-align: middle;
 }
 
 	.sticky-btn {
@@ -561,6 +538,7 @@ document.querySelectorAll("td").forEach(fitTextToCell);
 </body>
 
 </html>
+
 
 
 
