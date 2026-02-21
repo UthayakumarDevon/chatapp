@@ -472,6 +472,29 @@
 
   <!-- Plain JavaScript -->
   <script>
+
+  function fitTextToContainer(textElement, containerElement) {
+    let fontSize = 10; // start small
+    textElement.style.fontSize = fontSize + "px";
+
+    while (
+      textElement.offsetHeight < containerElement.offsetHeight &&
+      textElement.offsetWidth < containerElement.offsetWidth
+    ) {
+      fontSize++;
+      textElement.style.fontSize = fontSize + "px";
+    }
+
+    // step back one size to avoid overflow
+    textElement.style.fontSize = (fontSize - 1) + "px";
+  }
+
+  const text = document.getElementById("text");
+  const table = document.getElementById("table");
+  fitTextToContainer(text, table);
+
+	  textFit(document.getElementById('table'));
+
 	  function fitTextToCell(cell) {
   let span = cell.querySelector("span");
   let size = 10;
@@ -540,6 +563,7 @@ document.querySelectorAll("td").forEach(fitTextToCell);
 </body>
 
 </html>
+
 
 
 
